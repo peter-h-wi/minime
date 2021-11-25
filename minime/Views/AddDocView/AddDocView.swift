@@ -8,15 +8,40 @@
 import SwiftUI
 
 struct AddDocView: View {
+    // @StateObject private var DashBoardVM = DashBoardViewModel()
+    // @State private var
+    @State private var title = ""
+    @State private var imgTitle1 = ""
+    @State private var image1: Image?
+    
+    
+
     var body: some View {
         Form {
             Section("Title") {
-                Text("Vaccine")
+                TextField("Document Title", text: $title)
             }
             
-            Section("Image") {
-                ImportImageView()
+            Section("Image 1") {
+                ImportImageView(image: $image1, imgTitle: $imgTitle1)
             }
+            Button(action: {}) {
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("Add Image")
+                }
+            }
+            .foregroundColor(.white)
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(
+                RoundedRectangle(cornerRadius: 15, style: .continuous)
+                    .fill(.blue)
+                    .opacity(0.7)
+            )
+            
+            
+            .contentShape(Rectangle())
         }
     }
 }

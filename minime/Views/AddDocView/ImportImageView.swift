@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ImportImageView: View {
-    @State private var image: Image?
-    @State private var filterIntensity = 0.5
+    @Binding var image: Image?
+    @Binding var imgTitle: String
     @State private var showingImagePicker = false
     // property to stroe the image the user selected.
     @State private var inputImage: UIImage?
@@ -19,7 +19,8 @@ struct ImportImageView: View {
             ZStack {
                 Rectangle()
                     .fill(Color.secondary)
-                    .frame(width: 300, height: 300)
+                    .scaledToFit()
+                    .frame(height: 300)
                 
                 if image != nil {
                     image?
@@ -34,21 +35,12 @@ struct ImportImageView: View {
             .onTapGesture {
                 self.showingImagePicker = true
             }
-            
-            HStack {
-                Button("Change Filter") {
-                    
-                }
-                
-                Spacer()
-                
-                Button("Save") {
-                    
-                }
-            }
-            
+            TextField("Image Title", text: $imgTitle)
         }
-        .navigationBarTitle("Add Document")
+        .navigationBarTitle("New Document")
+        .navigationBarItems(trailing: Button(action: {}) {
+            Text("Save")
+        })
         .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
             ImagePicker(image: self.$inputImage)
         }
@@ -62,8 +54,8 @@ struct ImportImageView: View {
     }
 }
 
-struct ImportImageView_Previews: PreviewProvider {
-    static var previews: some View {
-        ImportImageView()
-    }
-}
+//struct ImportImageView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ImportImageView()
+//    }
+//}

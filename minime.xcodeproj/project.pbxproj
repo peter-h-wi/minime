@@ -113,7 +113,6 @@
 				FE4EE15F274C4DFE001411A4 /* DocView.swift */,
 				FE4EE161274C4E06001411A4 /* DocSettingView.swift */,
 				FE4EE163274C606E001411A4 /* ImageView.swift */,
-				FE9DCC2F274F3BAA003541C8 /* ImportImageView.swift */,
 			);
 			path = minime;
 			sourceTree = "<group>";
@@ -130,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				FE4EE165274C710A001411A4 /* AddDocView.swift */,
+				FE9DCC2F274F3BAA003541C8 /* ImportImageView.swift */,
 			);
 			path = AddDocView;
 			sourceTree = "<group>";
