@@ -11,45 +11,44 @@ final class DashBoardViewModel: ObservableObject {
     
     @Published var searchText : String = ""
     
-    @Published var favDocList = DocButtonListViewModel(
-        [DocButtonViewModel(DocInfo(favorite: true, title: "Student ID")),
-         DocButtonViewModel(DocInfo(favorite: true, title: "Passport")),
-         DocButtonViewModel(DocInfo(favorite: true, title: "Driver License")),
-         DocButtonViewModel(DocInfo(favorite: true, title: "Vaccination Card"))
-        ]
-    )
-    @Published var allDocList = DocButtonListViewModel(
-        [DocButtonViewModel(DocInfo(title: "Discover Card")),
-         DocButtonViewModel(DocInfo(title: "Business Card")),
-         DocButtonViewModel(DocInfo(title: "Eternals Ticket")),
-         DocButtonViewModel(DocInfo(title: "Six Flag")),
-         DocButtonViewModel(DocInfo(title: "Disney Membership")),
-        ]
-    )
-//
-//    func addDocument(docInfo: DocInfo) {
-//        docInfos.append(docInfo)
-//    }
-//
-//    func deleteDocument(docIndex: Int) {
-//        docInfos.remove(at: docIndex)
-//    }
-//
-//    func modifyDocument(docIndex: Int, docInfo: DocInfo) {
-//        docInfos[docIndex] = docInfo
-//    }
-//
-//    func addToFavorite(docInfo: DocInfo, docIndex: Int) {
-//        favDocInfos.append(docInfo)
-//        deleteDocument(docIndex: docIndex)
-//    }
-//
-//    func removeFromFavorite(docInfo: DocInfo, docIndex: Int) {
-//        docInfos.append(docInfo)
-//        favDocInfos.remove(at: docIndex)
-//    }
-//
-//    func modifyFromFavorite(docIndex: Int, docInfo: DocInfo) {
-//        favDocInfos[docIndex] = docInfo
-//    }
+    @Published var favDocs : [DocInfo] = [DocInfo(title: "Student ID"),
+                                          DocInfo(title: "Passport"),
+                                          DocInfo(title: "Driver License"),
+                                          DocInfo(title: "Vaccination Card")
+                                         ]
+    @Published var allDocs : [DocInfo] = [DocInfo(title: "Discover Card"),
+                                          DocInfo(title: "Business Card"),
+                                          DocInfo(title: "Eternals Ticket"),
+                                          DocInfo(title: "Six Flag"),
+                                          DocInfo(title: "Disney Membership")
+                                         ]
+    
+    func addDocument(docInfo: DocInfo, favorite: Bool) {
+        if (favorite) {
+            favDocs.append(docInfo)
+        } else {
+            allDocs.append(docInfo)
+        }
+    }
+
+    func deleteDocument(docInfo: DocInfo, favorite: Bool) {
+        if (favorite) {
+            favDocs.removeAll(where: {$0.id == docInfo.id })
+        } else {
+            allDocs.removeAll(where: {$0.id == docInfo.id })
+        }
+    }
+
+    func modifyDocument(docInfo: DocInfo, favorite: Bool) {
+        if (favorite) {
+            if let index = favDocs.firstIndex(where: {$0.id == docInfo.id}) {
+                favDocs[index] = docInfo
+            }
+        } else {
+            if let index = allDocs.firstIndex(where: {$0.id == docInfo.id}) {
+                allDocs[index] = docInfo
+            }
+            allDocs.append(docInfo)
+        }
+    }
 }

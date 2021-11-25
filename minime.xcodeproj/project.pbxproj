@@ -19,11 +19,7 @@
 		FE4EE166274C710A001411A4 /* AddDocView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4EE165274C710A001411A4 /* AddDocView.swift */; };
 		FE9DCC2E274F3933003541C8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9DCC2D274F3933003541C8 /* ImagePicker.swift */; };
 		FE9DCC30274F3BAA003541C8 /* ImportImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9DCC2F274F3BAA003541C8 /* ImportImageView.swift */; };
-		FE9DCC35274F6D98003541C8 /* DocButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9DCC34274F6D98003541C8 /* DocButtonView.swift */; };
-		FE9DCC37274F6DA4003541C8 /* DocButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9DCC36274F6DA4003541C8 /* DocButtonViewModel.swift */; };
 		FE9DCC39274F6F6C003541C8 /* ImageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9DCC38274F6F6C003541C8 /* ImageInfo.swift */; };
-		FE9DCC3C274F71B7003541C8 /* DocButtonListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9DCC3B274F71B7003541C8 /* DocButtonListViewModel.swift */; };
-		FE9DCC3E274F71C5003541C8 /* DocButtonListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9DCC3D274F71C5003541C8 /* DocButtonListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,11 +36,7 @@
 		FE4EE165274C710A001411A4 /* AddDocView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDocView.swift; sourceTree = "<group>"; };
 		FE9DCC2D274F3933003541C8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		FE9DCC2F274F3BAA003541C8 /* ImportImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportImageView.swift; sourceTree = "<group>"; };
-		FE9DCC34274F6D98003541C8 /* DocButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocButtonView.swift; sourceTree = "<group>"; };
-		FE9DCC36274F6DA4003541C8 /* DocButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocButtonViewModel.swift; sourceTree = "<group>"; };
 		FE9DCC38274F6F6C003541C8 /* ImageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInfo.swift; sourceTree = "<group>"; };
-		FE9DCC3B274F71B7003541C8 /* DocButtonListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocButtonListViewModel.swift; sourceTree = "<group>"; };
-		FE9DCC3D274F71C5003541C8 /* DocButtonListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocButtonListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,8 +70,7 @@
 		FE26C5AD274DBF0B00C75F6F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FE9DCC3A274F719D003541C8 /* DocButtonListView */,
-				FE9DCC33274F6D4F003541C8 /* DocButtonView */,
+				FE9DCC3F274F9D41003541C8 /* AddDocView */,
 				FE26C5AE274DBF7C00C75F6F /* DashBoardView */,
 			);
 			path = Views;
@@ -122,7 +113,6 @@
 				FE4EE15F274C4DFE001411A4 /* DocView.swift */,
 				FE4EE161274C4E06001411A4 /* DocSettingView.swift */,
 				FE4EE163274C606E001411A4 /* ImageView.swift */,
-				FE4EE165274C710A001411A4 /* AddDocView.swift */,
 				FE9DCC2F274F3BAA003541C8 /* ImportImageView.swift */,
 			);
 			path = minime;
@@ -136,22 +126,12 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		FE9DCC33274F6D4F003541C8 /* DocButtonView */ = {
+		FE9DCC3F274F9D41003541C8 /* AddDocView */ = {
 			isa = PBXGroup;
 			children = (
-				FE9DCC34274F6D98003541C8 /* DocButtonView.swift */,
-				FE9DCC36274F6DA4003541C8 /* DocButtonViewModel.swift */,
+				FE4EE165274C710A001411A4 /* AddDocView.swift */,
 			);
-			path = DocButtonView;
-			sourceTree = "<group>";
-		};
-		FE9DCC3A274F719D003541C8 /* DocButtonListView */ = {
-			isa = PBXGroup;
-			children = (
-				FE9DCC3D274F71C5003541C8 /* DocButtonListView.swift */,
-				FE9DCC3B274F71B7003541C8 /* DocButtonListViewModel.swift */,
-			);
-			path = DocButtonListView;
+			path = AddDocView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,13 +212,9 @@
 				FE4EE160274C4DFE001411A4 /* DocView.swift in Sources */,
 				FE26C5A8274DBC8600C75F6F /* DocInfo.swift in Sources */,
 				FE9DCC39274F6F6C003541C8 /* ImageInfo.swift in Sources */,
-				FE9DCC3E274F71C5003541C8 /* DocButtonListView.swift in Sources */,
-				FE9DCC35274F6D98003541C8 /* DocButtonView.swift in Sources */,
 				FE4EE162274C4E06001411A4 /* DocSettingView.swift in Sources */,
-				FE9DCC37274F6DA4003541C8 /* DocButtonViewModel.swift in Sources */,
 				FE4EE14E274C2E6A001411A4 /* minimeApp.swift in Sources */,
 				FE26C5B0274DBF9700C75F6F /* DashBoardViewModel.swift in Sources */,
-				FE9DCC3C274F71B7003541C8 /* DocButtonListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,5 +11,5 @@ import SwiftUI
 struct ImageInfo: Identifiable {
     let id = UUID()
     var title: String = "Image"
-    var image: Image?
+    var image: Image = Image("vaccineCard")
 }

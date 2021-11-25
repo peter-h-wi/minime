@@ -9,24 +9,84 @@ import SwiftUI
 
 struct DashBoardView: View {
     
-    @StateObject private var viewModel = DashBoardViewModel()
+    @StateObject private var DashBoardVM = DashBoardViewModel()
+    let columns = [
+        GridItem(.adaptive(minimum: 150, maximum: 200))
+    ]
+    let colors : [Color] = [.mint, .pink, .purple, .blue, .brown, .cyan, .indigo, .green, .orange, .teal, .secondary]
+
     
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack {
-                    SearchBar(text: $viewModel.searchText)
+                    SearchBar(text: $DashBoardVM.searchText)
                         .padding(.vertical, 5)
                     Text("Favorite")
                         .font(Font.title3.weight(.semibold))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
-                    DocButtonListView(docListVM: viewModel.favDocList)
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(DashBoardVM.favDocs, id: \.id) { doc in
+                            NavigationLink(destination: DocView()) {
+                                VStack(alignment: .leading) {
+                                    HStack {
+                                        Image(systemName: "heart.fill")
+                                            .font(Font.title2.weight(.semibold))
+                                            .foregroundColor(.yellow)
+                                        Spacer()
+                                        NavigationLink(destination: DocSettingView()) {
+                                            Image(systemName: "ellipsis.circle.fill")
+                                                .font(Font.title2.weight(.semibold))
+                                        }
+                                    }
+                                    Text(doc.title)
+                                        .font(Font.title3.weight(.semibold))
+                                        .multilineTextAlignment(.leading)
+                                        .frame(width: 134, height: 50, alignment: .bottomLeading)
+                                }
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                                .fill(colors[doc.colorIndex]))
+                                .contentShape(Rectangle())
+                            }
+                        }
+                    }
+                    
                     Text("All")
                         .font(Font.title3.weight(.semibold))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
-                    DocButtonListView(docListVM: viewModel.allDocList)
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(DashBoardVM.allDocs, id: \.id) { doc in
+                            NavigationLink(destination: DocView()) {
+                                VStack(alignment: .leading) {
+                                    HStack {
+                                        Image(systemName: "heart")
+                                            .font(Font.title2.weight(.semibold))
+                                            .foregroundColor(.yellow)
+                                        Spacer()
+                                        NavigationLink(destination: DocSettingView()) {
+                                            Image(systemName: "ellipsis.circle.fill")
+                                                .font(Font.title2.weight(.semibold))
+                                        }
+                                    }
+                                    Text(doc.title)
+                                        .font(Font.title3.weight(.semibold))
+                                        .multilineTextAlignment(.leading)
+                                        .frame(width: 134, height: 50, alignment: .bottomLeading)
+                                }
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                                .fill(colors[doc.colorIndex]))
+                                .contentShape(Rectangle())
+                            }
+                        }
+                    }
                 }
                 .frame(maxWidth: .infinity)
                 .background(.gray.opacity(0.05))
@@ -37,74 +97,10 @@ struct DashBoardView: View {
                     Image(systemName: "plus")
                 }
             })
-//            ScrollView {
-//                VStack {
-//                    SearchBar(text: $viewModel.searchText)
-//                        .padding(.vertical, 5)
-//                    Text("Favorite")
-//                        .font(Font.title3.weight(.semibold))
-//                        .frame(maxWidth: .infinity, alignment: .leading)
-//                        .padding()
-//                    FavoriteDocView(viewModel: viewModel, colors: colors)
-//                    Text("All")
-//                        .font(Font.title3.weight(.semibold))
-//                        .frame(maxWidth: .infinity, alignment: .leading)
-//                        .padding()
-//                    AllDocView(viewModel: viewModel, colors: colors)
-//                }
-//                .frame(maxWidth: .infinity)
-//                .background(Color.gray.opacity(0.05))
-//            }
-//            .navigationBarTitle("All documents")
-//            .navigationBarItems(trailing: HStack {
-//                NavigationLink(destination: AddDocView()) {
-//                    Image(systemName: "plus")
-//                }
-//            })
-            
         }
     }
 }
 
-struct DocumentButton: View {
-    let doc: DocInfo
-    let buttonColor: Color
-    
-    @State private var something = 1
-    var body: some View {
-        NavigationLink(destination: DocView()) {
-            VStack(alignment: .leading) {
-                HStack {
-                    Button(action: {
-                        //doc.favorite.toggle()
-                    }) {
-                        Image(systemName: doc.favorite ? "heart.fill" : "heart")
-                            .font(Font.title2.weight(.semibold))
-                            .foregroundColor(.yellow)
-                    }
-                    Spacer()
-                    NavigationLink(destination: DocSettingView()) {
-                        Image(systemName: "ellipsis.circle.fill")
-                            .font(Font.title2.weight(.semibold))
-                    }
-                }
-                Text(doc.title)
-                    .font(Font.title3.weight(.semibold))
-                    .multilineTextAlignment(.leading)
-                    .frame(width: 134, height: 50, alignment: .bottomLeading)
-            }
-            .foregroundColor(.white)
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(
-                RoundedRectangle(cornerRadius: 15, style: .continuous)
-                    .fill(buttonColor))
-            
-            .contentShape(Rectangle())
-        }
-        
-    }
-}
 
 struct SearchBar: View {
     @Binding var text: String
@@ -167,39 +163,5 @@ struct SearchBar: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         DashBoardView()
-    }
-}
-
-struct FavoriteDocView: View {
-    @StateObject var viewModel: DashBoardViewModel
-    let colors: [Color]
-    let columns = [
-        GridItem(.adaptive(minimum: 150, maximum: 200))
-    ]
-    
-    var body: some View {
-        LazyVGrid(columns: columns, spacing: 20) {
-//            ForEach(viewModel.favDocInfos, id:\.id) { doc in
-//                DocumentButton(isFavorite: true, doc: doc, buttonColor: colors[(doc.id * 7 + 5) % 11])
-//                    .padding(.horizontal)
-//            }
-        }
-    }
-}
-
-struct AllDocView: View {
-    @StateObject var viewModel: DashBoardViewModel
-    let colors: [Color]
-    let columns = [
-        GridItem(.adaptive(minimum: 150, maximum: 200))
-    ]
-    
-    var body: some View {
-        LazyVGrid(columns: columns, spacing: 20) {
-//            ForEach(viewModel.docInfos, id:\.id) { doc in
-//                DocumentButton(isFavorite: false, doc: doc, buttonColor: colors[(doc.id * 5 + 7) % 11])
-//                    .padding(.horizontal)
-//            }
-        }
     }
 }
