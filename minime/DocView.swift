@@ -26,11 +26,18 @@ struct DocView: View {
                 .background(Color.gray.opacity(0.05))
         }
         .navigationTitle(docTitle)
-        .navigationBarItems(trailing: Button(action: {
-            //count += 1
-        }) {
-            Text("Edit")
-        })
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Edit") {
+                    
+                }
+            }
+        }
+//        .navigationBarItems(trailing: Button(action: {
+//            //count += 1
+//        }) {
+//            Text("Edit")
+//        })
         //.overlay(DocTopBarView(docTopBarTitle: docTitle), alignment: .top)
     }
         

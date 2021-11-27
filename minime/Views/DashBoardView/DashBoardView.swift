@@ -92,10 +92,8 @@ struct DashBoardView: View {
                 .background(.gray.opacity(0.05))
             }
             .navigationBarTitle("All Documents")
-            .navigationBarItems(trailing: HStack {
-                NavigationLink(destination: AddDocView()) {
-                    Image(systemName: "plus")
-                }
+            .navigationBarItems(trailing: NavigationLink(destination: AddDocView()) {
+                Image(systemName: "plus")
             })
         }
     }

@@ -14,8 +14,6 @@ struct AddDocView: View {
     @State private var imgTitle1 = ""
     @State private var image1: Image?
     
-    
-
     var body: some View {
         Form {
             Section("Title") {
@@ -40,9 +38,14 @@ struct AddDocView: View {
                     .opacity(0.7)
             )
             
-            
             .contentShape(Rectangle())
         }
+        .navigationTitle("New Document")
+        .navigationBarItems(trailing: Button(action: {
+            //count += 1
+        }) {
+            Text("Save")
+        })
     }
 }
 
