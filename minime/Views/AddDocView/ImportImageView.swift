@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ImportImageView: View {
-    @Binding var image: Image?
+    @Binding var image: Image
     @Binding var imgTitle: String
     @State private var showingImagePicker = false
     // property to stroe the image the user selected.
@@ -21,15 +21,17 @@ struct ImportImageView: View {
                     .fill(Color.secondary)
                     .scaledToFit()
                     .frame(height: 300)
-                
-                if image != nil {
-                    image?
+
+                if image == Image(systemName: "photo") {
+                    image
                         .resizable()
+                        .foregroundColor(.white)
+                        .padding(100)
                         .scaledToFit()
                 } else {
-                    Text("Tap to select a picture")
-                        .foregroundColor(.white)
-                        .font(.headline)
+                    image
+                        .resizable()
+                        .scaledToFit()
                 }
             }
             .onTapGesture {

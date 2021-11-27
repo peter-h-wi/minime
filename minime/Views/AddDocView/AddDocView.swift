@@ -13,17 +13,26 @@ struct AddDocView: View {
     @State private var title = ""
     @State private var imgTitle1 = ""
     @State private var image1: Image?
+    @State private var images: [Image] = [Image(systemName: "photo")]
+    @State private var imgTitles: [String] = [""]
     
     var body: some View {
         Form {
             Section("Title") {
                 TextField("Document Title", text: $title)
             }
-            
-            Section("Image 1") {
-                ImportImageView(image: $image1, imgTitle: $imgTitle1)
+            if let images = images {
+                ForEach(images.indices, id: \.self) { i in
+                    Section("Image \(i+1)") {
+                        ImportImageView(image: $images[i], imgTitle: $imgTitles[i])
+                    }
+                }
             }
-            Button(action: {}) {
+
+            Button(action: {
+                images.append(Image(systemName: "photo"))
+                imgTitles.append("")
+            }) {
                 HStack {
                     Image(systemName: "plus.circle.fill")
                     Text("Add Image")
