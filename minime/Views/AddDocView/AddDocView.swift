@@ -41,11 +41,11 @@ struct AddDocView: View {
             .contentShape(Rectangle())
         }
         .navigationTitle("New Document")
-        .navigationBarItems(trailing: Button(action: {
-            //count += 1
-        }) {
-            Text("Save")
-        })
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Save") { }
+            }
+        }
     }
 }
 

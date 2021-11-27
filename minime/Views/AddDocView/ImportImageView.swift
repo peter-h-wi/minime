@@ -37,10 +37,6 @@ struct ImportImageView: View {
             }
             TextField("Image Title", text: $imgTitle)
         }
-        .navigationBarTitle("New Document")
-        .navigationBarItems(trailing: Button(action: {}) {
-            Text("Save")
-        })
         .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
             ImagePicker(image: self.$inputImage)
         }
