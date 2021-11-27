@@ -27,6 +27,7 @@ struct AddDocView: View {
                         ImportImageView(image: $images[i], imgTitle: $imgTitles[i])
                     }
                 }
+                .onDelete(perform: deleteItems)
             }
 
             Button(action: {
@@ -55,6 +56,14 @@ struct AddDocView: View {
                 Button("Save") { }
             }
         }
+        .toolbar {
+            EditButton()
+        }
+    }
+
+    func deleteItems(at offset: IndexSet) {
+        images.remove(atOffsets: offset)
+        imgTitles.remove(atOffsets: offset)
     }
 }
 
