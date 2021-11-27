@@ -10,6 +10,7 @@ import SwiftUI
 struct AddDocView: View {
     // @StateObject private var DashBoardVM = DashBoardViewModel()
     // @State private var
+    @EnvironmentObject var DashBoardVM: DashBoardViewModel
     @State private var title = ""
     @State private var imgTitle1 = ""
     @State private var image1: Image?
@@ -53,7 +54,9 @@ struct AddDocView: View {
         .navigationTitle("New Document")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Save") { }
+                Button("Save") {
+                    saveItems()
+                }
             }
         }
         .toolbar {
@@ -65,10 +68,23 @@ struct AddDocView: View {
         images.remove(atOffsets: offset)
         imgTitles.remove(atOffsets: offset)
     }
-}
 
-struct AddDocView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddDocView()
+    func saveItems() {
+        var imgList : [ImageInfo] = []
+        if (images.count < 1) {
+            return
+        }
+        for i in images.indices {
+            var imgInfo = ImageInfo(title: imgTitles[i], image: images[i])
+            imgList.append(imgInfo)
+        }
+        var docInfo = DocInfo(title: title, images: imgList)
+        DashBoardVM.addDocument(docInfo: docInfo, favorite: false)
     }
 }
+//
+//struct AddDocView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddDocView()
+//    }
+//}

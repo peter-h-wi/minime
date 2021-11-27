@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DashBoardView: View {
     
-    @StateObject private var DashBoardVM = DashBoardViewModel()
+    @EnvironmentObject private var DashBoardVM : DashBoardViewModel
     let columns = [
         GridItem(.adaptive(minimum: 150, maximum: 200))
     ]
