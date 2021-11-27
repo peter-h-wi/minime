@@ -11,6 +11,7 @@ struct AddDocView: View {
     // @StateObject private var DashBoardVM = DashBoardViewModel()
     // @State private var
     @EnvironmentObject var DashBoardVM: DashBoardViewModel
+    @Environment(\.presentationMode) var presentationMode : Binding<PresentationMode>
     @State private var title = ""
     @State private var imgTitle1 = ""
     @State private var image1: Image?
@@ -56,6 +57,7 @@ struct AddDocView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save") {
                     saveItems()
+                    presentationMode.wrappedValue.dismiss()
                 }
             }
         }
