@@ -10,18 +10,36 @@ import Foundation
 final class DashBoardViewModel: ObservableObject {
     
     @Published var searchText : String = ""
+    @Published var docs : [DocViewModel] = []
     
-    @Published var favDocs : [DocInfo] = [DocInfo(title: "Student ID"),
-                                          DocInfo(title: "Passport"),
-                                          DocInfo(title: "Driver License"),
-                                          DocInfo(title: "Vaccination Card")
-                                         ]
-    @Published var allDocs : [DocInfo] = [DocInfo(title: "Discover Card"),
-                                          DocInfo(title: "Business Card"),
-                                          DocInfo(title: "Eternals Ticket"),
-                                          DocInfo(title: "Six Flag"),
-                                          DocInfo(title: "Disney Membership")
-                                         ]
+    func fetchAllDocs() {
+        docs = CoreDataManager.shared.getAllDocs().map(DocViewModel.init)
+    }
+    
+    func getFavoriteDocs() -> [DocViewModel]{
+        return docs.filter { doc in
+            return doc.favorite == true
+        }
+    }
+    
+    func getAllDocs() -> [DocViewModel] {
+        return docs.filter { doc in
+            return doc.favorite == false
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @Published var favDocs : [DocInfo] = []
+    @Published var allDocs : [DocInfo] = []
+    
     
     func addDocument(docInfo: DocInfo, favorite: Bool) {
         if (favorite) {
@@ -50,5 +68,24 @@ final class DashBoardViewModel: ObservableObject {
             }
             allDocs.append(docInfo)
         }
+    }
+}
+
+extension DashBoardViewModel {
+    static var favExample: [DocInfo] {
+        [DocInfo(title: "Student ID"),
+         DocInfo(title: "Passport"),
+         DocInfo(title: "Driver License"),
+         DocInfo(title: "Vaccination Card")
+        ]
+    }
+    
+    static var allExample: [DocInfo] {
+        [DocInfo(title: "Discover Card"),
+         DocInfo(title: "Business Card"),
+         DocInfo(title: "Eternals Ticket"),
+         DocInfo(title: "Six Flag"),
+         DocInfo(title: "Disney Membership")
+        ]
     }
 }

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct DashBoardView: View {
+    @StateObject var DashBoardVM = DashBoardViewModel()
     
-    @EnvironmentObject private var DashBoardVM : DashBoardViewModel
     let columns = [
         GridItem(.adaptive(minimum: 150, maximum: 200))
     ]
@@ -22,45 +22,54 @@ struct DashBoardView: View {
                 VStack {
                     SearchBar(text: $DashBoardVM.searchText)
                         .padding(.vertical, 5)
+                    Divider()
+                        .padding(.top, 11)
+                    
                     Text("Favorite")
-                        .font(Font.title3.weight(.semibold))
+                        .font(Font.title3.weight(.bold))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
                     LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(DashBoardVM.favDocs, id: \.id) { doc in
-                            NavigationLink(destination: DocView()) {
-                                VStack(alignment: .leading) {
-                                    HStack {
+                        ForEach(DashBoardVM.getFavoriteDocs(), id: \.id) { doc in
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    Button(action: {
+                                        // toggle favorite
+                                    }) {
                                         Image(systemName: "heart.fill")
                                             .font(Font.title2.weight(.semibold))
                                             .foregroundColor(.yellow)
-                                        Spacer()
-                                        NavigationLink(destination: DocSettingView()) {
-                                            Image(systemName: "ellipsis.circle.fill")
-                                                .font(Font.title2.weight(.semibold))
-                                        }
                                     }
+                                    Spacer()
+                                    NavigationLink(destination: DocSettingView()) {
+                                        Image(systemName: "ellipsis.circle.fill")
+                                            .font(Font.title2.weight(.semibold))
+                                    }
+                                }
+                                NavigationLink(destination: DocView()) {
                                     Text(doc.title)
                                         .font(Font.title3.weight(.semibold))
                                         .multilineTextAlignment(.leading)
                                         .frame(width: 134, height: 50, alignment: .bottomLeading)
                                 }
-                                .foregroundColor(.white)
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(RoundedRectangle(cornerRadius: 15, style: .continuous)
-                                                .fill(colors[doc.colorIndex]))
-                                .contentShape(Rectangle())
                             }
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                            .fill(colors[doc.colorIndex]))
+                            .contentShape(Rectangle())
                         }
                     }
+                    Divider()
+                        .padding(.top, 11)
                     
                     Text("All")
-                        .font(Font.title3.weight(.semibold))
+                        .font(Font.title3.weight(.bold))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
                     LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(DashBoardVM.allDocs, id: \.id) { doc in
+                        ForEach(DashBoardVM.getAllDocs(), id: \.id) { doc in
                             NavigationLink(destination: DocView()) {
                                 VStack(alignment: .leading) {
                                     HStack {
@@ -88,14 +97,17 @@ struct DashBoardView: View {
                         }
                     }
                 }
-                .frame(maxWidth: .infinity)
-                .background(.gray.opacity(0.05))
             }
             .navigationBarTitle("All Documents")
-            .navigationBarItems(trailing: NavigationLink(destination: AddDocView()) {
+            .navigationBarItems(trailing: NavigationLink(destination: AddDocView(DashBoardVM: DashBoardVM)) {
                 Image(systemName: "plus")
             })
         }
+        .frame(maxWidth: .infinity)
+        .background(.gray.opacity(0.05))
+        .onAppear(perform: {
+            DashBoardVM.fetchAllDocs()
+        })
     }
 }
 
@@ -122,7 +134,6 @@ struct SearchBar: View {
                         if isEditing {
                             Button(action: {
                                 self.text = ""
-                                
                             }) {
                                 Image(systemName: "multiply.circle.fill")
                                     .foregroundColor(.gray)

@@ -12,7 +12,6 @@ struct minimeApp: App {
     var body: some Scene {
         WindowGroup {
             DashBoardView()
-            .environmentObject(DashBoardViewModel())
         }
     }
 }

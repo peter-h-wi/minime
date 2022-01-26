@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ImportImageView: View {
     @Binding var image: Image
-    @Binding var imgTitle: String
+    //@Binding var imgTitle: String
     @State private var showingImagePicker = false
     // property to stroe the image the user selected.
     @State private var inputImage: UIImage?
@@ -37,7 +37,7 @@ struct ImportImageView: View {
             .onTapGesture {
                 self.showingImagePicker = true
             }
-            TextField("Image Title", text: $imgTitle)
+            //TextField("Image Title", text: $imgTitle)
         }
         .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
             ImagePicker(image: self.$inputImage)
