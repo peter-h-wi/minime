@@ -41,12 +41,12 @@ struct DashBoardView: View {
                                             .foregroundColor(.yellow)
                                     }
                                     Spacer()
-                                    NavigationLink(destination: DocSettingView()) {
-                                        Image(systemName: "ellipsis.circle.fill")
-                                            .font(Font.title2.weight(.semibold))
-                                    }
+//                                    NavigationLink(destination: EditDocView(DashBoardVM: DashBoardVM, myDoc: doc)) {
+//                                        Image(systemName: "ellipsis.circle.fill")
+//                                            .font(Font.title2.weight(.semibold))
+//                                    }
                                 }
-                                NavigationLink(destination: DocView()) {
+                                NavigationLink(destination: DocView(doc: doc)) {
                                     Text(doc.title)
                                         .font(Font.title3.weight(.semibold))
                                         .multilineTextAlignment(.leading)
@@ -70,7 +70,7 @@ struct DashBoardView: View {
                         .padding()
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(DashBoardVM.getAllDocs(), id: \.id) { doc in
-                            NavigationLink(destination: DocView()) {
+                            NavigationLink(destination: DocView(doc: doc)) {
                                 VStack(alignment: .leading) {
                                     HStack {
                                         Image(systemName: "heart")

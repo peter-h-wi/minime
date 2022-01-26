@@ -24,7 +24,6 @@
 		FEDEE5EC27A09A77002DA2BE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDEE5EB27A09A77002DA2BE /* CoreDataManager.swift */; };
 		FEDEE5EE27A09DCC002DA2BE /* DocViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDEE5ED27A09DCC002DA2BE /* DocViewModel.swift */; };
 		FEDEE5F027A0A11D002DA2BE /* AddDocViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDEE5EF27A0A11D002DA2BE /* AddDocViewModel.swift */; };
-		FEDEE5F327A101AC002DA2BE /* EditDocView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDEE5F227A101AC002DA2BE /* EditDocView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +45,6 @@
 		FEDEE5EB27A09A77002DA2BE /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		FEDEE5ED27A09DCC002DA2BE /* DocViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocViewModel.swift; sourceTree = "<group>"; };
 		FEDEE5EF27A0A11D002DA2BE /* AddDocViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDocViewModel.swift; sourceTree = "<group>"; };
-		FEDEE5F227A101AC002DA2BE /* EditDocView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDocView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +78,7 @@
 		FE26C5AD274DBF0B00C75F6F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FEDEE5F127A1019A002DA2BE /* EditDocView */,
+				FEDEE5F627A10699002DA2BE /* DocView */,
 				FE9DCC3F274F9D41003541C8 /* AddDocView */,
 				FE26C5AE274DBF7C00C75F6F /* DashBoardView */,
 			);
@@ -121,7 +119,6 @@
 				FE4EE14D274C2E6A001411A4 /* minimeApp.swift */,
 				FE4EE151274C2E6C001411A4 /* Assets.xcassets */,
 				FE4EE153274C2E6C001411A4 /* Preview Content */,
-				FE4EE15F274C4DFE001411A4 /* DocView.swift */,
 				FE4EE161274C4E06001411A4 /* DocSettingView.swift */,
 				FE4EE163274C606E001411A4 /* ImageView.swift */,
 				FEDEE5E827A099FE002DA2BE /* DocAppModel.xcdatamodeld */,
@@ -149,12 +146,12 @@
 			path = AddDocView;
 			sourceTree = "<group>";
 		};
-		FEDEE5F127A1019A002DA2BE /* EditDocView */ = {
+		FEDEE5F627A10699002DA2BE /* DocView */ = {
 			isa = PBXGroup;
 			children = (
-				FEDEE5F227A101AC002DA2BE /* EditDocView.swift */,
+				FE4EE15F274C4DFE001411A4 /* DocView.swift */,
 			);
-			path = EditDocView;
+			path = DocView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,7 +227,6 @@
 				FE4EE164274C606E001411A4 /* ImageView.swift in Sources */,
 				FE4EE166274C710A001411A4 /* AddDocView.swift in Sources */,
 				FE4EE150274C2E6A001411A4 /* DashBoardView.swift in Sources */,
-				FEDEE5F327A101AC002DA2BE /* EditDocView.swift in Sources */,
 				FE9DCC30274F3BAA003541C8 /* ImportImageView.swift in Sources */,
 				FE9DCC2E274F3933003541C8 /* ImagePicker.swift in Sources */,
 				FE4EE160274C4DFE001411A4 /* DocView.swift in Sources */,
