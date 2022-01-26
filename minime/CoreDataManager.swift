@@ -26,6 +26,19 @@ class CoreDataManager {
         }
     }
     
+    func getDocById(id: NSManagedObjectID) -> DocData? {
+        do {
+            return try viewContext.existingObject(with: id) as? DocData
+        } catch {
+            return nil
+        }
+    }
+    
+    func deleteDoc(doc: DocData) {
+        viewContext.delete(doc)
+        save()
+    }
+    
     func save() {
         do {
             try viewContext.save()

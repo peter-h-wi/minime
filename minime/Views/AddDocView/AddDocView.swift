@@ -63,6 +63,7 @@ struct AddDocView: View {
                                 .padding(.horizontal, 10)
                                 .background(Color(.systemGray5))
                                 .cornerRadius(10)
+                                .shadow(color: Color(.sRGBLinear, red: 0/255, green: 0/255, blue:0/255).opacity(0.25), radius: 8, x: 0, y: 4)
                         }
                         
                         Divider()
@@ -71,6 +72,7 @@ struct AddDocView: View {
                             .font(Font.title3.weight(.bold))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(7)
+                            .shadow(color: Color(.sRGBLinear, red: 0/255, green: 0/255, blue:0/255).opacity(0.25), radius: 8, x: 0, y: 4)
                         
                         Divider()
                     }
@@ -93,7 +95,7 @@ struct AddDocView: View {
                                         .fill(Color.cyan))
                         .font(.title3)
                         .foregroundColor(.white)
-                        
+                        .shadow(color: Color(.sRGBLinear, red: 0/255, green: 0/255, blue:0/255).opacity(0.25), radius: 8, x: 0, y: 4)
                     }
                 }
                 .padding(.horizontal)

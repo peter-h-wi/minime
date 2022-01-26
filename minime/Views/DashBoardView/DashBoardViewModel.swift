@@ -28,8 +28,20 @@ final class DashBoardViewModel: ObservableObject {
         }
     }
     
+    func delete(_ doc: DocViewModel) {
+        let existingDoc = CoreDataManager.shared.getDocById(id: doc.id)
+        if let existingDoc = existingDoc {
+            CoreDataManager.shared.deleteDoc(doc: existingDoc)
+        }
+    }
     
-    
+    func toggleFavoriteOf(_ doc: DocViewModel) {
+        let existingDoc = CoreDataManager.shared.getDocById(id: doc.id)
+        if let existingDoc = existingDoc {
+            existingDoc.favorite = !existingDoc.favorite
+            CoreDataManager.shared.save()
+        }
+    }
     
     
     
