@@ -35,7 +35,7 @@ struct AddDocView: View {
                                 Image(uiImage: AddDocVM.myImage!)
                                     .renderingMode(.original)
                                     .resizable()
-                                    //.scaledToFit()
+                                    .scaledToFit()
                                     .frame(width: geo.size.width*0.9)
                                     .cornerRadius(10)
                             }
