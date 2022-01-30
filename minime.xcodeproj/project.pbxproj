@@ -14,15 +14,12 @@
 		FE4EE155274C2E6C001411A4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE4EE154274C2E6C001411A4 /* Preview Assets.xcassets */; };
 		FE4EE160274C4DFE001411A4 /* DocView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4EE15F274C4DFE001411A4 /* DocView.swift */; };
 		FE4EE166274C710A001411A4 /* AddDocView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4EE165274C710A001411A4 /* AddDocView.swift */; };
-		FE9C321F27A4F1ED00073AAA /* PasscodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9C321E27A4F1ED00073AAA /* PasscodeModel.swift */; };
 		FE9DCC2E274F3933003541C8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9DCC2D274F3933003541C8 /* ImagePicker.swift */; };
 		FE9DCC30274F3BAA003541C8 /* ImportImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9DCC2F274F3BAA003541C8 /* ImportImageView.swift */; };
 		FEDEE5EA27A099FE002DA2BE /* DocAppModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FEDEE5E827A099FE002DA2BE /* DocAppModel.xcdatamodeld */; };
 		FEDEE5EC27A09A77002DA2BE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDEE5EB27A09A77002DA2BE /* CoreDataManager.swift */; };
 		FEDEE5EE27A09DCC002DA2BE /* DocViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDEE5ED27A09DCC002DA2BE /* DocViewModel.swift */; };
 		FEDEE5F027A0A11D002DA2BE /* AddDocViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDEE5EF27A0A11D002DA2BE /* AddDocViewModel.swift */; };
-		FEF7163127A22A8600E7C24A /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF7163027A22A8600E7C24A /* AuthenticationView.swift */; };
-		FEF7163327A22A9A00E7C24A /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF7163227A22A9A00E7C24A /* AuthenticationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,15 +31,12 @@
 		FE4EE154274C2E6C001411A4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FE4EE15F274C4DFE001411A4 /* DocView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocView.swift; sourceTree = "<group>"; };
 		FE4EE165274C710A001411A4 /* AddDocView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDocView.swift; sourceTree = "<group>"; };
-		FE9C321E27A4F1ED00073AAA /* PasscodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeModel.swift; sourceTree = "<group>"; };
 		FE9DCC2D274F3933003541C8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		FE9DCC2F274F3BAA003541C8 /* ImportImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportImageView.swift; sourceTree = "<group>"; };
 		FEDEE5E927A099FE002DA2BE /* DocAppModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DocAppModel.xcdatamodel; sourceTree = "<group>"; };
 		FEDEE5EB27A09A77002DA2BE /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		FEDEE5ED27A09DCC002DA2BE /* DocViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocViewModel.swift; sourceTree = "<group>"; };
 		FEDEE5EF27A0A11D002DA2BE /* AddDocViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDocViewModel.swift; sourceTree = "<group>"; };
-		FEF7163027A22A8600E7C24A /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
-		FEF7163227A22A9A00E7C24A /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +54,6 @@
 			isa = PBXGroup;
 			children = (
 				FEDEE5ED27A09DCC002DA2BE /* DocViewModel.swift */,
-				FE9C321E27A4F1ED00073AAA /* PasscodeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -76,7 +69,6 @@
 		FE26C5AD274DBF0B00C75F6F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FEF7162F27A22A7200E7C24A /* AuthenticationView */,
 				FEDEE5F627A10699002DA2BE /* DocView */,
 				FE9DCC3F274F9D41003541C8 /* AddDocView */,
 				FE26C5AE274DBF7C00C75F6F /* DashBoardView */,
@@ -150,15 +142,6 @@
 			path = DocView;
 			sourceTree = "<group>";
 		};
-		FEF7162F27A22A7200E7C24A /* AuthenticationView */ = {
-			isa = PBXGroup;
-			children = (
-				FEF7163027A22A8600E7C24A /* AuthenticationView.swift */,
-				FEF7163227A22A9A00E7C24A /* AuthenticationViewModel.swift */,
-			);
-			path = AuthenticationView;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -230,7 +213,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE4EE166274C710A001411A4 /* AddDocView.swift in Sources */,
-				FEF7163327A22A9A00E7C24A /* AuthenticationViewModel.swift in Sources */,
 				FE4EE150274C2E6A001411A4 /* DashBoardView.swift in Sources */,
 				FE9DCC30274F3BAA003541C8 /* ImportImageView.swift in Sources */,
 				FE9DCC2E274F3933003541C8 /* ImagePicker.swift in Sources */,
@@ -240,9 +222,7 @@
 				FEDEE5EE27A09DCC002DA2BE /* DocViewModel.swift in Sources */,
 				FEDEE5EA27A099FE002DA2BE /* DocAppModel.xcdatamodeld in Sources */,
 				FE4EE14E274C2E6A001411A4 /* minimeApp.swift in Sources */,
-				FEF7163127A22A8600E7C24A /* AuthenticationView.swift in Sources */,
 				FE26C5B0274DBF9700C75F6F /* DashBoardViewModel.swift in Sources */,
-				FE9C321F27A4F1ED00073AAA /* PasscodeModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

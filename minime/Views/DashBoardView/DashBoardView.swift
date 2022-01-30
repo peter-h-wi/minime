@@ -19,20 +19,61 @@ struct DashBoardView: View {
     
     var body: some View {
         NavigationView {
-            if isUnlocked {
-                ScrollView {
-                    VStack {
-                        SearchBar(text: $DashBoardVM.searchText)
-                            .padding(.vertical, 5)
-                        Divider()
-                            .padding(.top, 11)
-                        
-                        Text("Favorite")
-                            .font(Font.title3.weight(.bold))
-                            .frame(maxWidth: .infinity, alignment: .leading)
+            ScrollView {
+                VStack {
+                    SearchBar(text: $DashBoardVM.searchText)
+                        .padding(.vertical, 5)
+                    Divider()
+                        .padding(.top, 11)
+                    
+                    Text("Favorite")
+                        .font(Font.title3.weight(.bold))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding()
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(DashBoardVM.getFavoriteDocs(), id: \.id) { doc in
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    Button(action: {
+                                        withAnimation{
+                                            DashBoardVM.toggleFavoriteOf(doc)
+                                            DashBoardVM.fetchAllDocs()
+                                        }
+                                    }) {
+                                        Image(systemName: "heart.fill")
+                                            .font(Font.title2.weight(.semibold))
+                                            .foregroundColor(.yellow)
+                                    }
+                                    Spacer()
+                                    DeleteButton(DashBoardVM: DashBoardVM, doc: doc)
+                                }
+                                NavigationLink(destination: DocView(doc: doc)) {
+                                    Text(doc.title)
+                                        .font(Font.title3.weight(.semibold))
+                                        .multilineTextAlignment(.leading)
+                                        .frame(width: 134, height: 50, alignment: .bottomLeading)
+                                }
+                            }
+                            .foregroundColor(.white)
                             .padding()
-                        LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(DashBoardVM.getFavoriteDocs(), id: \.id) { doc in
+                            .frame(maxWidth: .infinity)
+                            .background(RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                            .fill(colors[doc.colorIndex]))
+                            .contentShape(Rectangle())
+                            .shadow(color: Color(.sRGBLinear, red: 0/255, green: 0/255, blue:0/255).opacity(0.25), radius: 8, x: 0, y: 4)
+                        }
+                    }
+                    .frame(minHeight: 100)
+                    Divider()
+                        .padding(.top, 11)
+                    
+                    Text("All")
+                        .font(Font.title3.weight(.bold))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding()
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(DashBoardVM.getAllDocs(), id: \.id) { doc in
+                            NavigationLink(destination: DocView(doc: doc)) {
                                 VStack(alignment: .leading) {
                                     HStack {
                                         Button(action: {
@@ -41,19 +82,17 @@ struct DashBoardView: View {
                                                 DashBoardVM.fetchAllDocs()
                                             }
                                         }) {
-                                            Image(systemName: "heart.fill")
+                                            Image(systemName: "heart")
                                                 .font(Font.title2.weight(.semibold))
                                                 .foregroundColor(.yellow)
                                         }
                                         Spacer()
                                         DeleteButton(DashBoardVM: DashBoardVM, doc: doc)
                                     }
-                                    NavigationLink(destination: DocView(doc: doc)) {
-                                        Text(doc.title)
-                                            .font(Font.title3.weight(.semibold))
-                                            .multilineTextAlignment(.leading)
-                                            .frame(width: 134, height: 50, alignment: .bottomLeading)
-                                    }
+                                    Text(doc.title)
+                                        .font(Font.title3.weight(.semibold))
+                                        .multilineTextAlignment(.leading)
+                                        .frame(width: 134, height: 50, alignment: .bottomLeading)
                                 }
                                 .foregroundColor(.white)
                                 .padding()
@@ -64,64 +103,24 @@ struct DashBoardView: View {
                                 .shadow(color: Color(.sRGBLinear, red: 0/255, green: 0/255, blue:0/255).opacity(0.25), radius: 8, x: 0, y: 4)
                             }
                         }
-                        .frame(minHeight: 100)
-                        Divider()
-                            .padding(.top, 11)
-                        
-                        Text("All")
-                            .font(Font.title3.weight(.bold))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding()
-                        LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(DashBoardVM.getAllDocs(), id: \.id) { doc in
-                                NavigationLink(destination: DocView(doc: doc)) {
-                                    VStack(alignment: .leading) {
-                                        HStack {
-                                            Button(action: {
-                                                withAnimation{
-                                                    DashBoardVM.toggleFavoriteOf(doc)
-                                                    DashBoardVM.fetchAllDocs()
-                                                }
-                                            }) {
-                                                Image(systemName: "heart")
-                                                    .font(Font.title2.weight(.semibold))
-                                                    .foregroundColor(.yellow)
-                                            }
-                                            Spacer()
-                                            DeleteButton(DashBoardVM: DashBoardVM, doc: doc)
-                                        }
-                                        Text(doc.title)
-                                            .font(Font.title3.weight(.semibold))
-                                            .multilineTextAlignment(.leading)
-                                            .frame(width: 134, height: 50, alignment: .bottomLeading)
-                                    }
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .frame(maxWidth: .infinity)
-                                    .background(RoundedRectangle(cornerRadius: 15, style: .continuous)
-                                                    .fill(colors[doc.colorIndex]))
-                                    .contentShape(Rectangle())
-                                    .shadow(color: Color(.sRGBLinear, red: 0/255, green: 0/255, blue:0/255).opacity(0.25), radius: 8, x: 0, y: 4)
-                                }
-                            }
-                        }
-                        .frame(minHeight: 100)
                     }
+                    .frame(minHeight: 100)
                 }
-                .navigationBarTitle("DocuVault")
-                .navigationBarItems(trailing: NavigationLink(destination: AddDocView(DashBoardVM: DashBoardVM)) {
-                    Image(systemName: "plus")
-                })
-            .navigationBarItems(trailing: EditButton())
-            } else {
-                AuthenticationView(isLogined: $isUnlocked)
             }
+            .navigationBarTitle("DocuVault")
+            .navigationBarItems(trailing: NavigationLink(destination: AddDocView(DashBoardVM: DashBoardVM)) {
+                Image(systemName: "plus")
+            })
+            .navigationBarItems(trailing: EditButton())
         }
+        .disabled(!isUnlocked)
+        .blur(radius: isUnlocked ? 0 : 10)
+        .opacity(isUnlocked ? 1 : 0.5)
         .frame(maxWidth: .infinity)
         .background(.gray.opacity(0.05))
         .onAppear(perform: {
-            authenticate()
             DashBoardVM.fetchAllDocs()
+            authenticate()
         })
     }
     
@@ -129,14 +128,22 @@ struct DashBoardView: View {
         let context = LAContext()
         var error: NSError?
         
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
             let reason = "We need to unlock your data"
             
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
                 if success {
                     isUnlocked = true
                 } else {
-                    // there was a problem
+//                    // there was a problem
+//                    context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { usccess, authenticationError
+//                        in
+//                        if success {
+//                            isUnlocked = true
+//                        } else {
+//                            // there was a problem
+//                        }
+//                    }
                 }
             }
         } else {
@@ -164,25 +171,6 @@ struct DeleteButton: View {
             }
         }
     }
-    
-//
-//    @Binding var numbers: [Int]
-//    let onDelete: (IndexSet) -> ()
-//
-//    var body: some View {
-//        VStack {
-//            if self.editMode?.wrappedValue == .active {
-//                Button(action: {
-//                    if let index = numbers.firstIndex(of: number) {
-//                        self.onDelete(IndexSet(integer: index))
-//                    }
-//                }) {
-//                    Image(systemName: "minus.circle")
-//                }
-//                .offset(x: 10, y: -10)
-//            }
-//        }
-//    }
 }
 
 

@@ -34,16 +34,6 @@ class CoreDataManager {
         }
     }
     
-    func getCredential() -> [PasscodeData] {
-        let request: NSFetchRequest<PasscodeData> = PasscodeData.fetchRequest()
-        
-        do {
-            return try viewContext.fetch(request)
-        } catch {
-            return []
-        }
-    }
-    
     func deleteDoc(doc: DocData) {
         viewContext.delete(doc)
         save()

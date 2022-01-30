@@ -17,9 +17,10 @@ struct DocView: View {
                 .resizable()
                 .cornerRadius(10)
                 .scaledToFit()
-                .navigationTitle(doc.title)
-                .navigationBarTitleDisplayMode(.inline)
+                .padding()
         }
+        .navigationTitle(doc.title)
+        .navigationBarTitleDisplayMode(.inline)
     }
     
 }
