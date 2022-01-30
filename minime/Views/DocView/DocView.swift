@@ -11,53 +11,16 @@ struct DocView: View {
     let doc: DocViewModel
     
     var body: some View {
-        GeometryReader { geo in
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack(alignment: .center) {
-                    VStack(alignment: .center) {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.secondary)
-                                .scaledToFit()
-                                .frame(width: geo.size.width*0.9)
-                            Image(uiImage: doc.image)
-                                .renderingMode(.original)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: geo.size.width*0.9)
-                                .cornerRadius(10)
-                        }
-                    }
-                    .frame(height: geo.size.height*0.5)
-                    
-                    Divider()
-                    
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text("What is it?")
-                                .font(Font.title3.weight(.bold))
-                                .frame(maxWidth: geo.size.width*0.3, alignment: .leading)
-                            .padding(7)
-                            Text(doc.title)
-                                .padding(7)
-                                .padding(.horizontal, 10)
-                                .background(Color(.systemGray5))
-                                .cornerRadius(10)
-                        }
-                        
-                        Divider()
-                    }
-                }
-                .padding(.horizontal)
-            }
-            .frame(maxWidth: .infinity)
-            .clipped()
-            .padding(.top, 10)
-            .navigationTitle(doc.title)
-            .navigationBarTitleDisplayMode(.inline)
+        ZoomableScrollView {
+            Image(uiImage: doc.image)
+                .renderingMode(.original)
+                .resizable()
+                .cornerRadius(10)
+                .scaledToFit()
+                .navigationTitle(doc.title)
+                .navigationBarTitleDisplayMode(.inline)
         }
     }
-        
     
 }
 
@@ -90,3 +53,54 @@ struct DocTopBarView: View {
 //        DocView()
 //    }
 //}
+
+
+struct ZoomableScrollView<Content: View>: UIViewRepresentable {
+  private var content: Content
+
+  init(@ViewBuilder content: () -> Content) {
+    self.content = content()
+  }
+
+  func makeUIView(context: Context) -> UIScrollView {
+    // set up the UIScrollView
+    let scrollView = UIScrollView()
+    scrollView.delegate = context.coordinator  // for viewForZooming(in:)
+    scrollView.maximumZoomScale = 20
+    scrollView.minimumZoomScale = 1
+    scrollView.bouncesZoom = true
+
+    // create a UIHostingController to hold our SwiftUI content
+    let hostedView = context.coordinator.hostingController.view!
+    hostedView.translatesAutoresizingMaskIntoConstraints = true
+    hostedView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    hostedView.frame = scrollView.bounds
+    scrollView.addSubview(hostedView)
+
+    return scrollView
+  }
+
+  func makeCoordinator() -> Coordinator {
+    return Coordinator(hostingController: UIHostingController(rootView: self.content))
+  }
+
+  func updateUIView(_ uiView: UIScrollView, context: Context) {
+    // update the hosting controller's SwiftUI content
+    context.coordinator.hostingController.rootView = self.content
+    assert(context.coordinator.hostingController.view.superview == uiView)
+  }
+
+  // MARK: - Coordinator
+
+  class Coordinator: NSObject, UIScrollViewDelegate {
+    var hostingController: UIHostingController<Content>
+
+    init(hostingController: UIHostingController<Content>) {
+      self.hostingController = hostingController
+    }
+
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+      return hostingController.view
+    }
+  }
+}

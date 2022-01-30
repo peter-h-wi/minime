@@ -7,7 +7,12 @@
         <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="PasscodeData" representedClassName="PasscodeData" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="passwordHash" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="DocData" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="PasscodeData" positionX="-63" positionY="18" width="128" height="59"/>
     </elements>
 </model>

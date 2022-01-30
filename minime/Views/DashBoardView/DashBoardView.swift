@@ -114,7 +114,7 @@ struct DashBoardView: View {
                 })
             .navigationBarItems(trailing: EditButton())
             } else {
-                Text("Locked")
+                AuthenticationView(isLogined: $isUnlocked)
             }
         }
         .frame(maxWidth: .infinity)
