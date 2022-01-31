@@ -71,29 +71,30 @@ struct DashBoardView: View {
                             }
                         }
                         .frame(minHeight: 100)
-                    } else {
+                    }
+                    else {
                         Text("Favorite")
                             .font(Font.title3.weight(.bold))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding()
                         LazyVGrid(columns: columns, spacing: 20) {
                             ForEach(DashBoardVM.getFavoriteDocs(), id: \.id) { doc in
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        Button(action: {
-                                            withAnimation{
-                                                DashBoardVM.toggleFavoriteOf(doc)
-                                                DashBoardVM.fetchAllDocs()
+                                NavigationLink(destination: DocView(doc: doc)) {
+                                    VStack(alignment: .leading) {
+                                        HStack {
+                                            Button(action: {
+                                                withAnimation{
+                                                    DashBoardVM.toggleFavoriteOf(doc)
+                                                    DashBoardVM.fetchAllDocs()
+                                                }
+                                            }) {
+                                                Image(systemName: "heart.fill")
+                                                    .font(Font.title2.weight(.semibold))
+                                                    .foregroundColor(.yellow)
                                             }
-                                        }) {
-                                            Image(systemName: "heart.fill")
-                                                .font(Font.title2.weight(.semibold))
-                                                .foregroundColor(.yellow)
+                                            Spacer()
+                                            DeleteButton(DashBoardVM: DashBoardVM, doc: doc)
                                         }
-                                        Spacer()
-                                        DeleteButton(DashBoardVM: DashBoardVM, doc: doc)
-                                    }
-                                    NavigationLink(destination: DocView(doc: doc)) {
                                         Text(doc.title)
                                             .font(Font.title3.weight(.semibold))
                                             .multilineTextAlignment(.leading)
@@ -153,6 +154,11 @@ struct DashBoardView: View {
                                     .contentShape(Rectangle())
                                     .shadow(color: Color(.sRGBLinear, red: 0/255, green: 0/255, blue:0/255).opacity(0.25), radius: 8, x: 0, y: 4)
                                 }
+                                .onDrag({
+                                    DashBoardVM.draggedItem = doc
+                                    return NSItemProvider(item: nil, typeIdentifier: nil)
+                                })
+                                .onDrop(of: [UTType.text], delegate: MyDropDelegate(item: doc, items: $DashBoardVM.docs, draggedItem: $DashBoardVM.draggedItem))
                             }
                         }
                         .frame(minHeight: 100)
@@ -301,7 +307,7 @@ struct MyDropDelegate: DropDelegate {
             withAnimation(.default) {
                 self.items.move(fromOffsets: IndexSet(integer: from), toOffset: to > from ? to + 1 : to)
             }
-            vm.changeLocation()
+            //vm.changeLocation()
         }
     }
 }
