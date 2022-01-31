@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 import LocalAuthentication
 
 struct DashBoardView: View {
@@ -61,6 +62,11 @@ struct DashBoardView: View {
                                             .fill(colors[doc.colorIndex]))
                             .contentShape(Rectangle())
                             .shadow(color: Color(.sRGBLinear, red: 0/255, green: 0/255, blue:0/255).opacity(0.25), radius: 8, x: 0, y: 4)
+                            .onDrag({
+                                DashBoardVM.draggedItem = doc
+                                return NSItemProvider(item: nil, typeIdentifier: nil)
+                            })
+                            .onDrop(of: [UTType.text], delegate: MyDropDelegate(item: doc, items: $DashBoardVM.docs, draggedItem: $DashBoardVM.draggedItem))
                         }
                     }
                     .frame(minHeight: 100)
@@ -107,7 +113,7 @@ struct DashBoardView: View {
                     .frame(minHeight: 100)
                 }
             }
-            .navigationBarTitle("DocuVault")
+            .navigationBarTitle("Minime")
             .navigationBarItems(trailing: NavigationLink(destination: AddDocView(DashBoardVM: DashBoardVM)) {
                 Image(systemName: "plus")
             })
@@ -135,15 +141,6 @@ struct DashBoardView: View {
                 if success {
                     isUnlocked = true
                 } else {
-//                    // there was a problem
-//                    context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { usccess, authenticationError
-//                        in
-//                        if success {
-//                            isUnlocked = true
-//                        } else {
-//                            // there was a problem
-//                        }
-//                    }
                 }
             }
         } else {
@@ -234,5 +231,31 @@ struct SearchBar: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         DashBoardView()
+    }
+}
+
+struct MyDropDelegate: DropDelegate {
+    let item : DocViewModel
+    @StateObject var vm = DashBoardViewModel()
+    @Binding var items : [DocViewModel]
+    @Binding var draggedItem : DocViewModel?
+    
+    func performDrop(info: DropInfo) -> Bool {
+        return true
+    }
+    
+    func dropEntered(info: DropInfo) {
+        guard let draggedItem = draggedItem else {
+            return
+        }
+
+        if draggedItem.id != item.id {
+            let from = items.firstIndex(where: {$0.id == draggedItem.id})!
+            let to = items.firstIndex(where: {$0.id == item.id})!
+            withAnimation(.default) {
+                self.items.move(fromOffsets: IndexSet(integer: from), toOffset: to > from ? to + 1 : to)
+            }
+            vm.changeLocation()
+        }
     }
 }

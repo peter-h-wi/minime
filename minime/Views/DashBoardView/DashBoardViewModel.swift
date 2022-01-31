@@ -11,6 +11,7 @@ final class DashBoardViewModel: ObservableObject {
     
     @Published var searchText : String = ""
     @Published var docs : [DocViewModel] = []
+    @Published var draggedItem : DocViewModel?
     
     func fetchAllDocs() {
         docs = CoreDataManager.shared.getAllDocs().map(DocViewModel.init)
@@ -41,5 +42,9 @@ final class DashBoardViewModel: ObservableObject {
             existingDoc.favorite = !existingDoc.favorite
             CoreDataManager.shared.save()
         }
+    }
+    
+    func changeLocation() {
+        CoreDataManager.shared.save()
     }
 }
