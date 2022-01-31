@@ -121,7 +121,7 @@ struct DashBoardView: View {
         }
         .disabled(!isUnlocked)
         .blur(radius: isUnlocked ? 0 : 10)
-        .opacity(isUnlocked ? 1 : 0.5)
+        .opacity(isUnlocked ? 1 : 0.6)
         .frame(maxWidth: .infinity)
         .background(.gray.opacity(0.05))
         .onAppear(perform: {
