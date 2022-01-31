@@ -17,6 +17,15 @@ final class DashBoardViewModel: ObservableObject {
         docs = CoreDataManager.shared.getAllDocs().map(DocViewModel.init)
     }
     
+    func getFilteredDocs() -> [DocViewModel]{
+        if (searchText == "") {
+            return docs
+        }
+        return docs.filter { doc in
+            return doc.title.contains(searchText)
+        }
+    }
+    
     func getFavoriteDocs() -> [DocViewModel]{
         return docs.filter { doc in
             return doc.favorite == true

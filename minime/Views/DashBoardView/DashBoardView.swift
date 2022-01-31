@@ -11,6 +11,7 @@ import LocalAuthentication
 
 struct DashBoardView: View {
     @State private var isUnlocked = false
+    @State private var isSearching = false
     @StateObject var DashBoardVM = DashBoardViewModel()
     
     let columns = [
@@ -22,64 +23,17 @@ struct DashBoardView: View {
         NavigationView {
             ScrollView {
                 VStack {
-                    SearchBar(text: $DashBoardVM.searchText)
+                    SearchBar(text: $DashBoardVM.searchText, isSearching: $isSearching)
                         .padding(.vertical, 5)
                     Divider()
                         .padding(.top, 11)
-                    
-                    Text("Favorite")
-                        .font(Font.title3.weight(.bold))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding()
-                    LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(DashBoardVM.getFavoriteDocs(), id: \.id) { doc in
-                            VStack(alignment: .leading) {
-                                HStack {
-                                    Button(action: {
-                                        withAnimation{
-                                            DashBoardVM.toggleFavoriteOf(doc)
-                                            DashBoardVM.fetchAllDocs()
-                                        }
-                                    }) {
-                                        Image(systemName: "heart.fill")
-                                            .font(Font.title2.weight(.semibold))
-                                            .foregroundColor(.yellow)
-                                    }
-                                    Spacer()
-                                    DeleteButton(DashBoardVM: DashBoardVM, doc: doc)
-                                }
-                                NavigationLink(destination: DocView(doc: doc)) {
-                                    Text(doc.title)
-                                        .font(Font.title3.weight(.semibold))
-                                        .multilineTextAlignment(.leading)
-                                        .frame(width: 134, height: 50, alignment: .bottomLeading)
-                                }
-                            }
-                            .foregroundColor(.white)
+                    if (isSearching) {
+                        Text("Search Results")
+                            .font(Font.title3.weight(.bold))
+                            .frame(maxWidth: .infinity, alignment: .leading)
                             .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(RoundedRectangle(cornerRadius: 15, style: .continuous)
-                                            .fill(colors[doc.colorIndex]))
-                            .contentShape(Rectangle())
-                            .shadow(color: Color(.sRGBLinear, red: 0/255, green: 0/255, blue:0/255).opacity(0.25), radius: 8, x: 0, y: 4)
-                            .onDrag({
-                                DashBoardVM.draggedItem = doc
-                                return NSItemProvider(item: nil, typeIdentifier: nil)
-                            })
-                            .onDrop(of: [UTType.text], delegate: MyDropDelegate(item: doc, items: $DashBoardVM.docs, draggedItem: $DashBoardVM.draggedItem))
-                        }
-                    }
-                    .frame(minHeight: 100)
-                    Divider()
-                        .padding(.top, 11)
-                    
-                    Text("All")
-                        .font(Font.title3.weight(.bold))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding()
-                    LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(DashBoardVM.getAllDocs(), id: \.id) { doc in
-                            NavigationLink(destination: DocView(doc: doc)) {
+                        LazyVGrid(columns: columns, spacing: 20) {
+                            ForEach(DashBoardVM.getFilteredDocs(), id: \.id) { doc in
                                 VStack(alignment: .leading) {
                                     HStack {
                                         Button(action: {
@@ -88,17 +42,19 @@ struct DashBoardView: View {
                                                 DashBoardVM.fetchAllDocs()
                                             }
                                         }) {
-                                            Image(systemName: "heart")
+                                            Image(systemName: doc.favorite ? "heart.fill" : "heart")
                                                 .font(Font.title2.weight(.semibold))
                                                 .foregroundColor(.yellow)
                                         }
                                         Spacer()
                                         DeleteButton(DashBoardVM: DashBoardVM, doc: doc)
                                     }
-                                    Text(doc.title)
-                                        .font(Font.title3.weight(.semibold))
-                                        .multilineTextAlignment(.leading)
-                                        .frame(width: 134, height: 50, alignment: .bottomLeading)
+                                    NavigationLink(destination: DocView(doc: doc)) {
+                                        Text(doc.title)
+                                            .font(Font.title3.weight(.semibold))
+                                            .multilineTextAlignment(.leading)
+                                            .frame(width: 134, height: 50, alignment: .bottomLeading)
+                                    }
                                 }
                                 .foregroundColor(.white)
                                 .padding()
@@ -107,10 +63,100 @@ struct DashBoardView: View {
                                                 .fill(colors[doc.colorIndex]))
                                 .contentShape(Rectangle())
                                 .shadow(color: Color(.sRGBLinear, red: 0/255, green: 0/255, blue:0/255).opacity(0.25), radius: 8, x: 0, y: 4)
+                                .onDrag({
+                                    DashBoardVM.draggedItem = doc
+                                    return NSItemProvider(item: nil, typeIdentifier: nil)
+                                })
+                                .onDrop(of: [UTType.text], delegate: MyDropDelegate(item: doc, items: $DashBoardVM.docs, draggedItem: $DashBoardVM.draggedItem))
                             }
                         }
+                        .frame(minHeight: 100)
+                    } else {
+                        Text("Favorite")
+                            .font(Font.title3.weight(.bold))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
+                        LazyVGrid(columns: columns, spacing: 20) {
+                            ForEach(DashBoardVM.getFavoriteDocs(), id: \.id) { doc in
+                                VStack(alignment: .leading) {
+                                    HStack {
+                                        Button(action: {
+                                            withAnimation{
+                                                DashBoardVM.toggleFavoriteOf(doc)
+                                                DashBoardVM.fetchAllDocs()
+                                            }
+                                        }) {
+                                            Image(systemName: "heart.fill")
+                                                .font(Font.title2.weight(.semibold))
+                                                .foregroundColor(.yellow)
+                                        }
+                                        Spacer()
+                                        DeleteButton(DashBoardVM: DashBoardVM, doc: doc)
+                                    }
+                                    NavigationLink(destination: DocView(doc: doc)) {
+                                        Text(doc.title)
+                                            .font(Font.title3.weight(.semibold))
+                                            .multilineTextAlignment(.leading)
+                                            .frame(width: 134, height: 50, alignment: .bottomLeading)
+                                    }
+                                }
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                                .fill(colors[doc.colorIndex]))
+                                .contentShape(Rectangle())
+                                .shadow(color: Color(.sRGBLinear, red: 0/255, green: 0/255, blue:0/255).opacity(0.25), radius: 8, x: 0, y: 4)
+                                .onDrag({
+                                    DashBoardVM.draggedItem = doc
+                                    return NSItemProvider(item: nil, typeIdentifier: nil)
+                                })
+                                .onDrop(of: [UTType.text], delegate: MyDropDelegate(item: doc, items: $DashBoardVM.docs, draggedItem: $DashBoardVM.draggedItem))
+                            }
+                        }
+                        .frame(minHeight: 100)
+                        Divider()
+                            .padding(.top, 11)
+                        
+                        Text("All")
+                            .font(Font.title3.weight(.bold))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
+                        LazyVGrid(columns: columns, spacing: 20) {
+                            ForEach(DashBoardVM.getAllDocs(), id: \.id) { doc in
+                                NavigationLink(destination: DocView(doc: doc)) {
+                                    VStack(alignment: .leading) {
+                                        HStack {
+                                            Button(action: {
+                                                withAnimation{
+                                                    DashBoardVM.toggleFavoriteOf(doc)
+                                                    DashBoardVM.fetchAllDocs()
+                                                }
+                                            }) {
+                                                Image(systemName: "heart")
+                                                    .font(Font.title2.weight(.semibold))
+                                                    .foregroundColor(.yellow)
+                                            }
+                                            Spacer()
+                                            DeleteButton(DashBoardVM: DashBoardVM, doc: doc)
+                                        }
+                                        Text(doc.title)
+                                            .font(Font.title3.weight(.semibold))
+                                            .multilineTextAlignment(.leading)
+                                            .frame(width: 134, height: 50, alignment: .bottomLeading)
+                                    }
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+                                    .background(RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                                    .fill(colors[doc.colorIndex]))
+                                    .contentShape(Rectangle())
+                                    .shadow(color: Color(.sRGBLinear, red: 0/255, green: 0/255, blue:0/255).opacity(0.25), radius: 8, x: 0, y: 4)
+                                }
+                            }
+                        }
+                        .frame(minHeight: 100)
                     }
-                    .frame(minHeight: 100)
                 }
             }
             .navigationBarTitle("Minime")
@@ -173,8 +219,7 @@ struct DeleteButton: View {
 
 struct SearchBar: View {
     @Binding var text: String
-
-    @State private var isEditing = false
+    @Binding var isSearching: Bool
         
     var body: some View {
         HStack {
@@ -190,7 +235,7 @@ struct SearchBar: View {
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                             .padding(.leading, 7)
                         
-                        if isEditing {
+                        if isSearching {
                             Button(action: {
                                 self.text = ""
                             }) {
@@ -204,14 +249,14 @@ struct SearchBar: View {
                 .padding(.horizontal, 16)
                 .onTapGesture {
                     withAnimation {
-                        self.isEditing = true
+                        self.isSearching = true
                     }
                 }
             
-            if isEditing {
+            if isSearching {
                 Button(action: {
                     withAnimation {
-                        self.isEditing = false
+                        self.isSearching = false
                     }
                     self.text = ""
                     
