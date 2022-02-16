@@ -10,7 +10,7 @@ import UIKit
 
 struct AddDocView: View {
     @StateObject var AddDocVM = AddDocViewModel()
-    @StateObject var DashBoardVM : DashBoardViewModel
+    @ObservedObject var DashBoardVM : DashBoardViewModel
     @Environment(\.presentationMode) var presentationMode : Binding<PresentationMode>
 
     @State private var showingImagePicker = false
@@ -92,11 +92,12 @@ struct AddDocView: View {
                         .frame(maxWidth: .infinity, maxHeight: 50)
                         .clipped()
                         .background(RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                        .fill(Color.cyan))
+                                        .fill(Color.cyan).opacity(disableSave ? 0.5 : 1))
                         .font(.title3)
                         .foregroundColor(.white)
                         .shadow(color: Color(.sRGBLinear, red: 0/255, green: 0/255, blue:0/255).opacity(0.25), radius: 8, x: 0, y: 4)
                     }
+                    .disabled(disableSave)
                 }
                 .padding(.horizontal)
             }
@@ -112,6 +113,10 @@ struct AddDocView: View {
             return
         }
         AddDocVM.myImage = inputImage
+    }
+    
+    var disableSave: Bool {
+        AddDocVM.myImage == UIImage(systemName: "photo") || AddDocVM.myTitle.isEmpty
     }
 }
 
