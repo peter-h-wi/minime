@@ -46,37 +46,21 @@ struct DashBoardView: View {
             }
             .navigationBarTitle("DocuVault")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(trailing: NavigationLink(destination: AddDocView(DashBoardVM: DashBoardVM)) {
-                Image(systemName: "plus")
-            })
-            .navigationBarItems(trailing: EditButton())
+            .toolbar {
+                ToolbarItem (placement: .navigationBarTrailing) {
+                    EditButton()
+                }
+                ToolbarItem (placement: .navigationBarTrailing) {
+                    NavigationLink(destination: AddDocView(DashBoardVM: DashBoardVM)) {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
         }
         .frame(maxWidth: .infinity)
-        .background(.gray.opacity(0.05))
         .onAppear(perform: {
             DashBoardVM.fetchAllDocs()
         })
-    }
-}
-
-struct DeleteButton: View {
-    @Environment(\.editMode) var editMode
-    @ObservedObject var DashBoardVM: DashBoardViewModel
-    let doc: DocViewModel
-    
-    var body: some View {
-        if self.editMode?.wrappedValue == .active {
-            Button(action: {
-                withAnimation {
-                    DashBoardVM.delete(doc)
-                    DashBoardVM.fetchAllDocs()
-                }
-            }) {
-                Image(systemName: "x.circle.fill")
-                    .font(Font.title2.weight(.semibold))
-                    .foregroundColor(.red)
-            }
-        }
     }
 }
 

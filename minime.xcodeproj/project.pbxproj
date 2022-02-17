@@ -20,6 +20,8 @@
 		FEA1EC5B27BE987A00B3AAF8 /* MyDropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA1EC5A27BE987A00B3AAF8 /* MyDropDelegate.swift */; };
 		FEA1EC5D27BE99FF00B3AAF8 /* NavigationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA1EC5C27BE99FF00B3AAF8 /* NavigationCardView.swift */; };
 		FEA1EC5F27BE9BA800B3AAF8 /* DocListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA1EC5E27BE9BA800B3AAF8 /* DocListView.swift */; };
+		FEA1EC6527BEA8FA00B3AAF8 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA1EC6427BEA8FA00B3AAF8 /* ImageView.swift */; };
+		FEA1EC6727BEA9A300B3AAF8 /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA1EC6627BEA9A300B3AAF8 /* ZoomableScrollView.swift */; };
 		FEDEE5EA27A099FE002DA2BE /* DocAppModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FEDEE5E827A099FE002DA2BE /* DocAppModel.xcdatamodeld */; };
 		FEDEE5EC27A09A77002DA2BE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDEE5EB27A09A77002DA2BE /* CoreDataManager.swift */; };
 		FEDEE5EE27A09DCC002DA2BE /* DocViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDEE5ED27A09DCC002DA2BE /* DocViewModel.swift */; };
@@ -41,6 +43,8 @@
 		FEA1EC5A27BE987A00B3AAF8 /* MyDropDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDropDelegate.swift; sourceTree = "<group>"; };
 		FEA1EC5C27BE99FF00B3AAF8 /* NavigationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCardView.swift; sourceTree = "<group>"; };
 		FEA1EC5E27BE9BA800B3AAF8 /* DocListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocListView.swift; sourceTree = "<group>"; };
+		FEA1EC6427BEA8FA00B3AAF8 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		FEA1EC6627BEA9A300B3AAF8 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
 		FEDEE5E927A099FE002DA2BE /* DocAppModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DocAppModel.xcdatamodel; sourceTree = "<group>"; };
 		FEDEE5EB27A09A77002DA2BE /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		FEDEE5ED27A09DCC002DA2BE /* DocViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocViewModel.swift; sourceTree = "<group>"; };
@@ -70,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				FE9DCC2D274F3933003541C8 /* ImagePicker.swift */,
+				FEDEE5EB27A09A77002DA2BE /* CoreDataManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -123,7 +128,6 @@
 				FE4EE151274C2E6C001411A4 /* Assets.xcassets */,
 				FE4EE153274C2E6C001411A4 /* Preview Content */,
 				FEDEE5E827A099FE002DA2BE /* DocAppModel.xcdatamodeld */,
-				FEDEE5EB27A09A77002DA2BE /* CoreDataManager.swift */,
 			);
 			path = minime;
 			sourceTree = "<group>";
@@ -142,6 +146,7 @@
 				FE4EE165274C710A001411A4 /* AddDocView.swift */,
 				FE9DCC2F274F3BAA003541C8 /* ImportImageView.swift */,
 				FEDEE5EF27A0A11D002DA2BE /* AddDocViewModel.swift */,
+				FEA1EC6427BEA8FA00B3AAF8 /* ImageView.swift */,
 			);
 			path = AddDocView;
 			sourceTree = "<group>";
@@ -150,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				FE4EE15F274C4DFE001411A4 /* DocView.swift */,
+				FEA1EC6627BEA9A300B3AAF8 /* ZoomableScrollView.swift */,
 			);
 			path = DocView;
 			sourceTree = "<group>";
@@ -232,7 +238,9 @@
 				FEA1EC5927BE981A00B3AAF8 /* SearchBarView.swift in Sources */,
 				FE4EE160274C4DFE001411A4 /* DocView.swift in Sources */,
 				FEDEE5F027A0A11D002DA2BE /* AddDocViewModel.swift in Sources */,
+				FEA1EC6527BEA8FA00B3AAF8 /* ImageView.swift in Sources */,
 				FEDEE5EC27A09A77002DA2BE /* CoreDataManager.swift in Sources */,
+				FEA1EC6727BEA9A300B3AAF8 /* ZoomableScrollView.swift in Sources */,
 				FEDEE5EE27A09DCC002DA2BE /* DocViewModel.swift in Sources */,
 				FEDEE5EA27A099FE002DA2BE /* DocAppModel.xcdatamodeld in Sources */,
 				FE4EE14E274C2E6A001411A4 /* minimeApp.swift in Sources */,

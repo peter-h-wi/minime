@@ -12,6 +12,7 @@ struct NavigationCardView: View {
     let doc: DocViewModel
     let colors : [Color] = [.mint, .pink, .purple, .blue, .brown, .cyan, .indigo, .green, .orange, .teal, .secondary]
     @ObservedObject var DashBoardVM: DashBoardViewModel
+    @Environment(\.editMode) var editMode
     
     var body: some View {
         NavigationLink(destination: DocView(doc: doc)) {
@@ -27,6 +28,7 @@ struct NavigationCardView: View {
                             .font(Font.title2.weight(.semibold))
                             .foregroundColor(.yellow)
                     }
+                    
                     Spacer()
                     DeleteButton(DashBoardVM: DashBoardVM, doc: doc)
                 }
@@ -48,7 +50,7 @@ struct NavigationCardView: View {
                         .opacity(0.5)
                 )
         )
-        
+        .onAppear(perform: {editMode?.wrappedValue = .inactive})
         .contentShape(Rectangle())
         .shadow(color: colors[doc.colorIndex].opacity(0.8), radius: 6, x: 0, y: 4)
         .onDrag({
@@ -56,5 +58,27 @@ struct NavigationCardView: View {
             return NSItemProvider(item: nil, typeIdentifier: nil)
         })
         .onDrop(of: [UTType.text], delegate: MyDropDelegate(item: doc, vm: DashBoardVM, items: $DashBoardVM.docs, draggedItem: $DashBoardVM.draggedItem))
+    }
+}
+
+
+struct DeleteButton: View {
+    @Environment(\.editMode) var editMode
+    @ObservedObject var DashBoardVM: DashBoardViewModel
+    let doc: DocViewModel
+    
+    var body: some View {
+        if self.editMode?.wrappedValue == .active {
+            Button(action: {
+                withAnimation {
+                    DashBoardVM.delete(doc)
+                    DashBoardVM.fetchAllDocs()
+                }
+            }) {
+                Image(systemName: "x.circle.fill")
+                    .font(Font.title2.weight(.semibold))
+                    .foregroundColor(.red)
+            }
+        }
     }
 }

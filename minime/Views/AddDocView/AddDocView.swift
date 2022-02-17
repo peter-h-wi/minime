@@ -20,35 +20,7 @@ struct AddDocView: View {
         GeometryReader { geo in
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .center) {
-                    VStack(alignment: .center) {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.secondary)
-                                .scaledToFit()
-                                .frame(width: geo.size.width*0.9)
-                            if AddDocVM.myImage == UIImage(systemName: "photo") {
-                                Image(uiImage: AddDocVM.myImage!)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: geo.size.width*0.3, alignment: .center)
-                            } else {
-                                Image(uiImage: AddDocVM.myImage!)
-                                    .renderingMode(.original)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: geo.size.width*0.9)
-                                    .cornerRadius(10)
-                            }
-                        }
-                        .onTapGesture {
-                            self.showingImagePicker = true
-                        }
-                        //TextField("Image Title", text: $imgTitle)
-                    }
-                    .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
-                        ImagePicker(image: $AddDocVM.myImage)
-                    }
-                    .frame(height: geo.size.height*0.5)
+                    ImageView(AddDocVM: AddDocVM, showingImagePicker: $showingImagePicker, inputImage: $inputImage, geoWidth: geo.size.width, geoHeight: geo.size.height)
                     
                     Divider()
                     
@@ -108,20 +80,9 @@ struct AddDocView: View {
         .navigationBarTitleDisplayMode(.inline)
         }
     }
-    func loadImage() {
-        guard let inputImage = inputImage else {
-            return
-        }
-        AddDocVM.myImage = inputImage
-    }
+    
     
     var disableSave: Bool {
         AddDocVM.myImage == UIImage(systemName: "photo") || AddDocVM.myTitle.isEmpty
     }
 }
-
-//struct AddDocView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddDocView()
-//    }
-//}
