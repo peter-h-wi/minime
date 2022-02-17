@@ -43,16 +43,16 @@ struct NavigationCardView: View {
         .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 15, style: .continuous)
-                .strokeBorder(colors[doc.colorIndex], lineWidth: 3)
+                .strokeBorder(colors[doc.colorIndex].opacity(1), lineWidth: 3)
                 .background(
                     RoundedRectangle(cornerRadius: 15, style: .continuous)
                         .fill(colors[doc.colorIndex])
-                        .opacity(0.5)
+                        .opacity(0.7)
                 )
         )
         .onAppear(perform: {editMode?.wrappedValue = .inactive})
         .contentShape(Rectangle())
-        .shadow(color: colors[doc.colorIndex].opacity(0.8), radius: 6, x: 0, y: 4)
+        //.shadow(color: colors[doc.colorIndex].opacity(0.8), radius: 6, x: 0, y: 4)
         .onDrag({
             DashBoardVM.draggedItem = doc
             return NSItemProvider(item: nil, typeIdentifier: nil)

@@ -18,14 +18,15 @@ struct ImageView: View {
         VStack(alignment: .center) {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.secondary)
+                    .fill(.background)
                     .scaledToFit()
                     .frame(width: geoWidth*0.9)
                 if AddDocVM.myImage == UIImage(systemName: "photo") {
-                    Image(uiImage: AddDocVM.myImage!)
+                    Image(systemName: "doc.fill.badge.plus")
                         .resizable()
                         .scaledToFit()
                         .frame(width: geoWidth*0.3, alignment: .center)
+                        .foregroundColor(.primary)
                 } else {
                     Image(uiImage: AddDocVM.myImage!)
                         .renderingMode(.original)
