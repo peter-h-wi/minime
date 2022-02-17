@@ -16,6 +16,10 @@
 		FE4EE166274C710A001411A4 /* AddDocView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4EE165274C710A001411A4 /* AddDocView.swift */; };
 		FE9DCC2E274F3933003541C8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9DCC2D274F3933003541C8 /* ImagePicker.swift */; };
 		FE9DCC30274F3BAA003541C8 /* ImportImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9DCC2F274F3BAA003541C8 /* ImportImageView.swift */; };
+		FEA1EC5927BE981A00B3AAF8 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA1EC5827BE981A00B3AAF8 /* SearchBarView.swift */; };
+		FEA1EC5B27BE987A00B3AAF8 /* MyDropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA1EC5A27BE987A00B3AAF8 /* MyDropDelegate.swift */; };
+		FEA1EC5D27BE99FF00B3AAF8 /* NavigationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA1EC5C27BE99FF00B3AAF8 /* NavigationCardView.swift */; };
+		FEA1EC5F27BE9BA800B3AAF8 /* DocListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA1EC5E27BE9BA800B3AAF8 /* DocListView.swift */; };
 		FEDEE5EA27A099FE002DA2BE /* DocAppModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FEDEE5E827A099FE002DA2BE /* DocAppModel.xcdatamodeld */; };
 		FEDEE5EC27A09A77002DA2BE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDEE5EB27A09A77002DA2BE /* CoreDataManager.swift */; };
 		FEDEE5EE27A09DCC002DA2BE /* DocViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDEE5ED27A09DCC002DA2BE /* DocViewModel.swift */; };
@@ -33,6 +37,10 @@
 		FE4EE165274C710A001411A4 /* AddDocView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDocView.swift; sourceTree = "<group>"; };
 		FE9DCC2D274F3933003541C8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		FE9DCC2F274F3BAA003541C8 /* ImportImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportImageView.swift; sourceTree = "<group>"; };
+		FEA1EC5827BE981A00B3AAF8 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		FEA1EC5A27BE987A00B3AAF8 /* MyDropDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDropDelegate.swift; sourceTree = "<group>"; };
+		FEA1EC5C27BE99FF00B3AAF8 /* NavigationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCardView.swift; sourceTree = "<group>"; };
+		FEA1EC5E27BE9BA800B3AAF8 /* DocListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocListView.swift; sourceTree = "<group>"; };
 		FEDEE5E927A099FE002DA2BE /* DocAppModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DocAppModel.xcdatamodel; sourceTree = "<group>"; };
 		FEDEE5EB27A09A77002DA2BE /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		FEDEE5ED27A09DCC002DA2BE /* DocViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocViewModel.swift; sourceTree = "<group>"; };
@@ -81,6 +89,10 @@
 			children = (
 				FE4EE14F274C2E6A001411A4 /* DashBoardView.swift */,
 				FE26C5AF274DBF9700C75F6F /* DashBoardViewModel.swift */,
+				FEA1EC5827BE981A00B3AAF8 /* SearchBarView.swift */,
+				FEA1EC5A27BE987A00B3AAF8 /* MyDropDelegate.swift */,
+				FEA1EC5C27BE99FF00B3AAF8 /* NavigationCardView.swift */,
+				FEA1EC5E27BE9BA800B3AAF8 /* DocListView.swift */,
 			);
 			path = DashBoardView;
 			sourceTree = "<group>";
@@ -212,17 +224,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEA1EC5B27BE987A00B3AAF8 /* MyDropDelegate.swift in Sources */,
 				FE4EE166274C710A001411A4 /* AddDocView.swift in Sources */,
 				FE4EE150274C2E6A001411A4 /* DashBoardView.swift in Sources */,
 				FE9DCC30274F3BAA003541C8 /* ImportImageView.swift in Sources */,
 				FE9DCC2E274F3933003541C8 /* ImagePicker.swift in Sources */,
+				FEA1EC5927BE981A00B3AAF8 /* SearchBarView.swift in Sources */,
 				FE4EE160274C4DFE001411A4 /* DocView.swift in Sources */,
 				FEDEE5F027A0A11D002DA2BE /* AddDocViewModel.swift in Sources */,
 				FEDEE5EC27A09A77002DA2BE /* CoreDataManager.swift in Sources */,
 				FEDEE5EE27A09DCC002DA2BE /* DocViewModel.swift in Sources */,
 				FEDEE5EA27A099FE002DA2BE /* DocAppModel.xcdatamodeld in Sources */,
 				FE4EE14E274C2E6A001411A4 /* minimeApp.swift in Sources */,
+				FEA1EC5D27BE99FF00B3AAF8 /* NavigationCardView.swift in Sources */,
 				FE26C5B0274DBF9700C75F6F /* DashBoardViewModel.swift in Sources */,
+				FEA1EC5F27BE9BA800B3AAF8 /* DocListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
